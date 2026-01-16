@@ -146,6 +146,10 @@ int main(int argc, const char *argv[])
             case SDL_EVENT_QUIT:
                 app_running = false;
                 break;
+            case SDL_EVENT_KEY_DOWN:
+                if (event.key.scancode == SDL_SCANCODE_Q)
+                    app_running = false;
+                break;
 
             default:
                 break;
