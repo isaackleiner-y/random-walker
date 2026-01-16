@@ -136,6 +136,8 @@ int main(int argc, const char *argv[])
     create_agents(pAgents, num_agents);
 
     bool app_running = true;
+    bool is_pause = false;
+
     while(app_running)
     {
         SDL_Event event;
@@ -149,6 +151,10 @@ int main(int argc, const char *argv[])
             case SDL_EVENT_KEY_DOWN:
                 if (event.key.scancode == SDL_SCANCODE_Q)
                     app_running = false;
+                else if (event.key.scancode == SDL_SCANCODE_SPACE)
+                    is_pause = !is_pause;
+                    break;
+                
                 break;
 
             default:
@@ -156,14 +162,20 @@ int main(int argc, const char *argv[])
             }
         }
 
-        for (int i = 0; i < num_agents; i++)
+        if (!is_pause)
         {
-            move_agent(pSurface, &pAgents[i]);
+            for (int i = 0; i < num_agents; i++)
+            {
+                move_agent(pSurface, &pAgents[i]);
+            }
         }
+
+
         
         SDL_UpdateWindowSurface(pWindow);
         SDL_Delay(10);
     }
+    
     free(pAgents);
 
     return 0;
