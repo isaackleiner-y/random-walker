@@ -159,7 +159,6 @@ int main(int argc, const char *argv[])
                     is_pause = !is_pause;
                 }
                 else if (event.key.scancode == SDL_SCANCODE_R){
-                    printf("R key\n");
                     SDL_FillSurfaceRect(pSurface, NULL, black_screen);
                     create_agents(pAgents, num_agents);
                 }
