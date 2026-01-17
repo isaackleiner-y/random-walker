@@ -135,6 +135,8 @@ int main(int argc, const char *argv[])
     Agent *pAgents = calloc(num_agents, sizeof(Agent));
     create_agents(pAgents, num_agents);
 
+    Uint32 black_screen = 0xff000000;
+
     bool app_running = true;
     bool is_pause = false;
 
@@ -143,16 +145,25 @@ int main(int argc, const char *argv[])
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
-            switch (event.type)
-            {
+            switch (event.type){
+                
             case SDL_EVENT_QUIT:
                 app_running = false;
                 break;
+
             case SDL_EVENT_KEY_DOWN:
-                if (event.key.scancode == SDL_SCANCODE_Q)
+                if (event.key.scancode == SDL_SCANCODE_Q){
                     app_running = false;
-                else if (event.key.scancode == SDL_SCANCODE_SPACE)
+                }
+                else if (event.key.scancode == SDL_SCANCODE_SPACE){
                     is_pause = !is_pause;
+                }
+                else if (event.key.scancode == SDL_SCANCODE_R){
+                    printf("R key\n");
+                    SDL_FillSurfaceRect(pSurface, NULL, black_screen);
+                    create_agents(pAgents, num_agents);
+                }
+
                     break;
                 
                 break;
